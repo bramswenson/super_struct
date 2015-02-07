@@ -33,4 +33,8 @@ module SuperStruct
       struct.send(:include, InstanceMethods)
     end
   end
+
+  def self.from_hash(hash, &block)
+    new(hash, &block).new(hash)
+  end
 end

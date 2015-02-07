@@ -32,6 +32,12 @@ describe SuperStruct do
     end
   end
 
+  describe '::from_hash' do
+    it 'creates a class and instance from the input' do
+      expect(SuperStruct.from_hash(input)).to be_a Struct
+    end
+  end
+
   describe '#new' do
     context 'given multiple arguments as input' do
       subject { klass.new(:bar, :bang) }
