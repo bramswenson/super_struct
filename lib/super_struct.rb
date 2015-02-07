@@ -28,18 +28,23 @@ module SuperStruct
           self[member].deep_convert!
         end
       end
+      self
+    end
+
+    def ==(other)
+      other.respond_to?(:attributes) && attributes == other.attributes
     end
   end
 
-  def self.new(array_or_hash, &block)
-    keys = if array_or_hash.respond_to?(:has_key?)
-      array_or_hash.keys.sort.map(&:to_sym)
+  def self.new(*input, &block)
+    keys = if input.first.respond_to?(:has_key?)
+      input.first.keys.sort.map(&:to_sym)
     else
-      array_or_hash.sort.map(&:to_sym)
+      input.sort.map(&:to_sym)
     end
 
     Struct.new(*keys, &block).tap do |struct|
-      struct.send(:include, InstanceMethods)
+      struct.send(:include, ::SuperStruct::InstanceMethods)
     end
   end
 

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe SuperStruct do
-  let(:constructor_input)  { { foo: :bar, fiz: :bang } }
+  let(:constructor_input)  { { foo: { fiz: :bang } } }
   let(:klass)              { SuperStruct.new(constructor_input) }
   let(:input)              { constructor_input }
   subject                  { klass.new(input) }
@@ -39,10 +39,10 @@ describe SuperStruct do
   end
 
   describe '#new' do
-    context 'given multiple arguments as input' do
-      subject { klass.new(:bar, :bang) }
+    context 'given an array as input' do
+      subject { ::SuperStruct.new(:foo, :biz).new(:bar, :bang) }
 
-      it 'accepts an array as input' do
+      it 'uses the array as keys' do
         expect(subject.foo).to eq :bang
       end
     end
@@ -55,15 +55,18 @@ describe SuperStruct do
   end
 
   describe '#deep_convert!' do
-    let(:input)  { { foo: { fiz: :bang } } }
-    subject      { SuperStruct.from_hash(input) }
-
     it 'converts all hashes within itself to SuperStructs' do
       expect {
         subject.deep_convert!
       }.to change {
         subject.foo
       }.from(Hash).to(Struct)
+    end
+  end
+
+  describe '#==' do
+    it 'compares with attributes (not class since structs can be anonymous)' do
+      expect(subject).to eq klass.new(input)
     end
   end
 end
