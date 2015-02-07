@@ -36,6 +36,10 @@ john_doe = Customer.new(attributes)
 => #<struct Customer name="John Doe">
 john_doe.name
 => 'John Doe'
+john_doe.has_attribute?(:name)
+=> true
+john_doe.has_attribute?(:dob)
+=> false
 ```
 
 ## Testing
@@ -47,7 +51,7 @@ bundle exec rake spec
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/super_struct/fork )
+1. Fork it ( https://github.com/bramswenson/super_struct/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
