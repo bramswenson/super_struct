@@ -64,9 +64,6 @@ describe SuperStruct do
       }.to change {
         subject.foo
       }.from(Hash).to(Struct)
-      #expect(subject.foo).to be_a Hash
-      #subject.deep_convert!
-      #expect(subject.foo).to be_a Struct
     end
   end
 end
