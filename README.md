@@ -1,5 +1,7 @@
 # SuperStruct
 
+[![Build Status](https://travis-ci.org/bramswenson/super_struct.svg?branch=master)](https://travis-ci.org/bramswenson/super_struct)
+
 Simple extensions to `Struct` to make it more compatable with `Hash` without the performance penalties of `OpenStruct`
 
 ## Installation
