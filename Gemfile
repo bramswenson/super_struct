@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
-
-# Specify your gem's dependencies in super_struct.gemspec
 gemspec
+group :development, :test do
+  gem 'byebug', '~> 3.5.1', platforms: [ :ruby_20, :ruby_21, :ruby_22 ]
+  gem 'debugger', platforms: [ :ruby_19 ]
+end
