@@ -36,6 +36,13 @@ john_doe.name
 => 'John Doe'
 ```
 
+## Testing
+
+```ruby
+bundle install --path .bundle/bundle
+bundle exec rake spec
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/super_struct/fork )
