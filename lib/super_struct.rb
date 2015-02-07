@@ -20,6 +20,15 @@ module SuperStruct
         attributes
       end
     end
+
+    def deep_convert!
+      members.each do |member|
+        if self[member].respond_to?(:has_key?)
+          self[member] = ::SuperStruct.from_hash(self[member])
+          self[member].deep_convert!
+        end
+      end
+    end
   end
 
   def self.new(array_or_hash, &block)

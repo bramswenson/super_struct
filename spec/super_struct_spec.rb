@@ -48,15 +48,25 @@ describe SuperStruct do
     end
   end
 
-  describe '#members' do
-    it 'is the keys given to the constructor, sorted' do
-      expect(subject.members).to eq input.keys.sort
-    end
-  end
-
   describe '#attributes' do
     it 'is a hash of the attributes and their values' do
       expect(subject.attributes).to eq constructor_input
+    end
+  end
+
+  describe '#deep_convert!' do
+    let(:input)  { { foo: { fiz: :bang } } }
+    subject      { SuperStruct.from_hash(input) }
+
+    it 'converts all hashes within itself to SuperStructs' do
+      expect {
+        subject.deep_convert!
+      }.to change {
+        subject.foo
+      }.from(Hash).to(Struct)
+      #expect(subject.foo).to be_a Hash
+      #subject.deep_convert!
+      #expect(subject.foo).to be_a Struct
     end
   end
 end
