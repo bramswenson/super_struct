@@ -1,6 +1,6 @@
 # SuperStruct
 
-TODO: Write a gem description
+Simple extensions to `Struct` to make it more compatable with `Hash` without the performance penalties of `OpenStruct`
 
 ## Installation
 
@@ -20,7 +20,21 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'super_struct'
+
+attributes = { name: 'John Doe' }
+class Customer < SuperStruct.new(attributes)
+  def has_attribute?(attribute)
+    members.include?(attribute.to_sym)
+  end
+end
+
+john_doe = Customer.new(attributes)
+=> #<struct Customer name="John Doe">
+john_doe.name
+=> 'John Doe'
+```
 
 ## Contributing
 
