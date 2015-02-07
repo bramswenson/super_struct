@@ -23,7 +23,7 @@ module SuperStruct
 
     def deep_convert!
       members.each do |member|
-        if self[member].respond_to?(:has_key?)
+        if self[member].respond_to?(:has_key?) && self[member].size > 0
           self[member] = ::SuperStruct.from_hash(self[member])
           self[member].deep_convert!
         end
